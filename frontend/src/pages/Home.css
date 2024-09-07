@@ -1,0 +1,20 @@
+.home {
+    padding: 20px;
+    text-align: center;
+}
+
+.video-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.video-item {
+    flex: 1 1 30%;
+    max-width: 320px;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}

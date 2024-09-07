@@ -1,141 +1,97 @@
 .register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #1e2124;
-    color: white;
+    @apply flex justify-center items-center min-h-screen bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark;
 }
 
 .register-form {
-    padding: 2rem;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+    @apply p-8 rounded-lg w-full max-w-md;
 }
 
 .logo {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+    @apply text-3xl font-bold mb-4;
 }
 
 h1 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    @apply text-2xl mb-2;
 }
 
 .subtitle {
-    color: #a0a0a0;
-    margin-bottom: 1.5rem;
+    @apply text-gray-500 dark:text-gray-400 mb-6;
 }
 
 .google-login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #36393f;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-bottom: 1rem;
+    @apply flex items-center justify-center w-full py-3 bg-gray-200 dark:bg-gray-700 text-text-light dark:text-text-dark rounded-md mb-4 transition-colors duration-200;
 }
 
 .google-login img {
-    margin-right: 0.5rem;
+    @apply mr-2;
 }
 
 .divider {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #a0a0a0;
-    margin: 1rem 0;
+    @apply flex items-center text-center text-gray-500 dark:text-gray-400 my-4;
 }
 
 .divider::before,
 .divider::after {
-    content: '';
-    flex: 1;
-    border-bottom: 1px solid #a0a0a0;
+    @apply content-[''] flex-1 border-b border-gray-300 dark:border-gray-600;
 }
 
 .divider::before {
-    margin-right: .5em;
+    @apply mr-2;
 }
 
 .divider::after {
-    margin-left: .5em;
+    @apply ml-2;
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    @apply mb-4;
 }
 
 input {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #36393f;
-    border: 1px solid #4a4a4a;
-    border-radius: 4px;
-    font-size: 1rem;
-    color: white;
+    @apply w-full py-3 px-4 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-text-light dark:text-text-dark;
 }
 
 .register-button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #5865f2;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    @apply w-full py-3 bg-primary-light dark:bg-primary-dark text-white rounded-md transition-colors duration-200;
 }
 
-.register-button:hover {
-    background-color: #4752c4;
+.login-button:hover {
+    @apply bg-blue-600 dark:bg-blue-700;
 }
 
 .error-message {
-    color: #ff4444;
-    margin-bottom: 1rem;
+    @apply text-red-500 mb-4;
 }
 
-.login-link {
-    margin-top: 1rem;
-    font-size: 0.9rem;
+.signup-link,
+.forgot-password {
+    @apply mt-4 text-sm;
 }
 
-.login-link a {
-    color: #5865f2;
-    text-decoration: none;
+.signup-link a,
+.forgot-password a {
+    @apply text-primary-light dark:text-primary-dark;
 }
 
-.login-link a:hover {
-    text-decoration: underline;
+.signup-link a:hover,
+.forgot-password a:hover {
+    @apply underline;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
     .register-form {
-        padding: 1.5rem;
+        @apply p-6;
     }
 
     h1 {
-        font-size: 1.2rem;
+        @apply text-xl;
     }
 
     .subtitle {
-        font-size: 0.9rem;
+        @apply text-sm;
     }
 
-    input, .google-login, .register-button {
-        font-size: 0.9rem;
+    input, .google-login, .login-button {
+        @apply text-sm;
     }
 }

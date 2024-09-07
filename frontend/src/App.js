@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import VideoCreation from './pages/VideoCreation';
 import VideoEditor from './components/VideoEditor';
 import Sidebar from './components/Sidebar';
+import Settings from './pages/Settings';
 import './App.css';
+
 
 async function verifyToken(token) {
   try {
@@ -32,13 +35,15 @@ function App() {
         const checkAuth = async () => {
             const token = localStorage.getItem('token');
             if (token) {
-                // Add a function to verify the token
-                const isValid = await verifyToken(token);
-                if (isValid) {
-                    setIsAuthenticated(true);
-                } else {
-                    handleLogout();
+                try {
+                    const isValid = await verifyToken(token);
+                    setIsAuthenticated(isValid);
+                } catch (error) {
+                    console.error('Token verification failed:', error);
+                    setIsAuthenticated(false);
                 }
+            } else {
+                setIsAuthenticated(false);
             }
             setIsLoading(false);
         };
@@ -55,29 +60,34 @@ function App() {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>;
+         return <div className="flex items-center justify-center h-screen bg-white dark:bg-gray-800">
+            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+        </div>;
     }
 
     return (
-        <div className="app-container">
-            {isAuthenticated && <Sidebar />}
-            <main className="main-content">
-                <Routes>
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/login" element={<Login onLogin={handleLogin} />} />
-                    {isAuthenticated ? (
-                        <>
-                            <Route path="/home" element={<Home />} />
-                            <Route path="/create-video" element={<VideoCreation />} />
-                            <Route path="/VideoEditor/:videoId" element={<VideoEditor />} />
-                            <Route path="*" element={<Navigate to="/home" />} />
-                        </>
-                    ) : (
-                        <Route path="*" element={<Navigate to="/login" />} />
-                    )}
-                </Routes>
-            </main>
-        </div>
+        <ThemeProvider>
+            <div className="app-container dark:bg-background-dark dark:text-text-dark transition-colors duration-200">
+                {isAuthenticated && <Sidebar onLogout={handleLogout} />}
+                <main className="main-content">
+                    <Routes>
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+                        {isAuthenticated ? (
+                            <>
+                                <Route path="/home" element={<Home />} />
+                                <Route path="/create-video" element={<VideoCreation />} />
+                                <Route path="/VideoEditor/:videoId" element={<VideoEditor />} />
+                                <Route path="/settings" element={<Settings />} />
+                                <Route path="*" element={<Navigate to="/home" />} />
+                            </>
+                        ) : (
+                            <Route path="*" element={<Navigate to="/login" />} />
+                        )}
+                    </Routes>
+                </main>
+            </div>
+        </ThemeProvider>
     );
 }
 

@@ -54,10 +54,17 @@
 
 .main-content {
   flex-grow: 1;
-
-  background-color: #282c34;
+  margin-left: 250px;
   min-height: 100vh;
+  background-color: #282c34;
   color: white;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
 }
 
 /* Responsive video aspect ratio */

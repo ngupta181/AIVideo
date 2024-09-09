@@ -1,6 +1,6 @@
 require('dotenv').config();
 //console.log('JWT_SECRET:', process.env.JWT_SECRET);
-
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -32,6 +32,25 @@ const videosPath = path.join(__dirname, 'users');
 app.use('/videos', express.static(videosPath));
 
 app.use('/users', express.static(path.join(__dirname, 'users')));
+
+app.post('/verify-token', (req, res) => {
+    console.log('Verify token endpoint hit');
+    const token = req.headers.authorization?.split(' ')[1];
+    
+    if (!token) {
+      console.log('No token provided');
+      return res.status(401).json({ message: 'No token provided' });
+    }
+  
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log('Token verified successfully', decoded);
+      res.json({ valid: true, user: decoded });
+    } catch (error) {
+      console.error('Token verification failed', error);
+      res.status(401).json({ message: 'Invalid token' });
+    }
+});
 
 
 // Connect to MongoDB

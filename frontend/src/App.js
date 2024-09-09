@@ -9,23 +9,31 @@ import VideoEditor from './components/VideoEditor';
 import Sidebar from './components/Sidebar';
 import Settings from './pages/Settings';
 import './App.css';
+import { API_URL } from './config';
 
 
 async function verifyToken(token) {
-  try {
-    const response = await fetch('/api/verify-token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+    try {
+      console.log('Verifying token:', token);
+      const response = await fetch(`${API_URL}/verify-token`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      console.log('Token verification response:', response);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    });
-    return response.ok;
-  } catch (error) {
-    console.error('Error verifying token:', error);
-    return false;
+      const data = await response.json();
+      console.log('Token verification data:', data);
+      return data.valid;
+    } catch (error) {
+      console.error('Error verifying token:', error);
+      return false;
+    }
   }
-}
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);

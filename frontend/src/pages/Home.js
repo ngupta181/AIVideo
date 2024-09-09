@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Loader, FolderPlus, ChevronLeft, ChevronRight } from 'lucide-react';
+import { API_URL } from '../config';
+
 
 const ProjectCard = ({ video }) => (
   <div className="bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
@@ -32,7 +34,7 @@ const Home = () => {
       try {
         setLoading(true);
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:5000/api/video/all-videos', {
+        const response = await fetch(`${API_URL}/video/all-videos`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

@@ -1,9 +1,9 @@
 const axios = require('axios');
 const fs = require('fs').promises;
 
-const LEONARDO_API_URL = 'https://cloud.leonardo.ai/api/rest/v1/generations';
-const LEONARDO_MOTION_API_URL = 'https://cloud.leonardo.ai/api/rest/v1/generations-motion-svd';
-const LEONARDO_PROMPT_IMPROVE_URL = 'https://cloud.leonardo.ai/api/rest/v1/prompt/improve';
+const LEONARDO_API_URL = process.env.LEONARDO_API_URL;
+const LEONARDO_MOTION_API_URL = process.env.LEONARDO_MOTION_API_URL;
+const LEONARDO_PROMPT_IMPROVE_URL = process.env.LEONARDO_PROMPT_IMPROVE_URL;
 
 async function improvePrompt(prompt) {
     try {

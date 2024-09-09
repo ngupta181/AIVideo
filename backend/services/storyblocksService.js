@@ -3,7 +3,7 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 
-const STORYBLOCKS_API_URL = 'https://api.videoblocks.com/api/v2/videos/search';
+const STORYBLOCKS_API_URL = process.env.STORYBLOCKS_API_URL;
 const PUBLIC_KEY = process.env.STORYBLOCKS_PUBLIC_KEY;
 const PRIVATE_KEY = process.env.STORYBLOCKS_PRIVATE_KEY;
 

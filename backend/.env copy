@@ -1,10 +1,26 @@
-MONGO_URI=mongodb://localhost:27017/ai-video-creator
+MONGO_URI=
 JWT_SECRET=
 ISTOCK_API_KEY=yourIStockAPIKey
 OPENAI_API_KEY=
 
+PORT=5000
 
 STORYBLOCKS_PUBLIC_KEY=
 STORYBLOCKS_PRIVATE_KEY=
-STORYBLOCKS_PROJECT_ID=AI Video Generator
+STORYBLOCKS_PROJECT_ID=
 STORYBLOCKS_USER_ID=
+
+LEONARDO_API_KEY=
+
+REACT_APP_API_URL=http://localhost:5000/api
+
+FRONTEND_URL=http://localhost:3000
+
+LEONARDO_API_URL = https://cloud.leonardo.ai/api/rest/v1/generations
+
+LEONARDO_PROMPT_IMPROVE_URL = https://cloud.leonardo.ai/api/rest/v1/prompt/improve
+
+STORYBLOCKS_API_URL = https://api.videoblocks.com/api/v2/videos/search
+
+IMMERSITY_API_KEY=
+IMAGINE_API_KEY=

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Loader, FolderPlus, ChevronLeft, ChevronRight } from 'lucide-react';
 import { API_URL } from '../config';
+import { useNavigate } from 'react-router-dom';
 
-
-const ProjectCard = ({ video }) => (
-  <div className="bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
+const ProjectCard = ({ video, onClick }) => (
+  <div className="bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden cursor-pointer" onClick={onClick}>
     <img src={video.thumbnail || 'https://via.placeholder.com/300x200'} alt={video.title} className="w-full h-48 object-cover" />
     <div className="p-4">
       <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{video.title}</h3>
@@ -20,14 +20,13 @@ const ProjectCard = ({ video }) => (
 );
 
 const Home = () => {
+  const navigate = useNavigate();
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [videosPerPage] = useState(8); // Adjust this number as needed
-
-  
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -79,6 +78,10 @@ const Home = () => {
     pageNumbers.push(i);
   }
 
+  const handleVideoClick = (videoId) => {
+    navigate(`/VideoEditor/${videoId}`);
+  };
+
   return (
     <div className="bg-white dark:bg-gray-800 min-h-screen p-6">
       <div className="flex justify-between items-center mb-8">
@@ -124,7 +127,11 @@ const Home = () => {
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {currentVideos.map((video, index) => (
-              <ProjectCard key={index} video={video} />
+              <ProjectCard 
+                key={index} 
+                video={video} 
+                onClick={() => handleVideoClick(video._id)}
+              />
             ))}
           </div>
           
